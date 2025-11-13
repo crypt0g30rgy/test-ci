@@ -1,12 +1,16 @@
 kind: pipeline
-type: kubernetes  # or "docker" if using the Docker runner
-name: test-pipeline
+type: kubernetes
+name: k8s-pipeline-test
 
 steps:
-  - name: print-environment
+  - name: hello
     image: alpine:3
     commands:
-      - echo "✅ Drone CI Test Running"
-      - uname -a
-      - echo "Running on $(arch)"
-      - echo "Current time: $(date)"
+      - echo "🚀 Hello from Kubernetes Drone Runner!"
+      - cat /etc/os-release
+
+  - name: kubectl-version
+    image: bitnami/kubectl:latest
+    commands:
+      - echo "🔍 Checking cluster info..."
+      - kubectl version --client
