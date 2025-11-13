@@ -1,0 +1,12 @@
+kind: pipeline
+type: kubernetes  # or "docker" if using the Docker runner
+name: test-pipeline
+
+steps:
+  - name: print-environment
+    image: alpine:3
+    commands:
+      - echo "✅ Drone CI Test Running"
+      - uname -a
+      - echo "Running on $(arch)"
+      - echo "Current time: $(date)"
